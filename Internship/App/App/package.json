@@ -7,10 +7,12 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native webpack-start",
-    "test": "jest"
+    "test": "jest",
+    "start:host": "cross-env APP_NAME=host react-native webpack-start",
+    "start:contract": "cross-env APP_NAME=contract react-native webpack-start --port 8082"
   },
   "dependencies": {
-    "@callstack/repack": "^5.3.0",
+    "@callstack/repack": "^5.3.0",  
     "@react-native/new-app-screen": "0.86.2",
     "react": "19.2.3",
     "react-native": "0.86.2",
@@ -31,6 +33,7 @@
     "@types/jest": "^29.5.13",
     "@types/react": "^19.2.0",
     "@types/react-test-renderer": "^19.1.0",
+    "cross-env": "^10.1.0",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
     "prettier": "2.8.8",

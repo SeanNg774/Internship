@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContractMiniApp = () => {
+const ContractApp = () => {
   const styles = {
     container: {
       display: 'flex',
@@ -35,4 +35,4 @@ const ContractMiniApp = () => {
   );
 };
 
-export default ContractMiniApp;
+export default ContractApp;

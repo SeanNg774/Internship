@@ -76,7 +76,17 @@ export default (env) => {
   if (appName === 'contract') {
     return {
       ...baseConfig,
-      entry: './src/miniapps/contract/index.js',
+      
+      // 1. Explicitly name the entry chunk 'index' so Re.Pack recognizes it
+      entry: {
+        index: './src/miniapps/contract/index.js', 
+      },
+      
+      // 2. Explicitly tell Webpack it is hosted on port 8082
+      output: {
+        publicPath: 'http://localhost:8082/', 
+      },
+      
       plugins: [
         new Repack.RepackPlugin({
           context: __dirname,
@@ -85,6 +95,7 @@ export default (env) => {
         }),
         new Repack.plugins.ModuleFederationPlugin({
           name: 'contract_app',
+          filename: 'contract_app.container.bundle',
           exposes: {
             './App': './src/miniapps/contract/index.js',
           },

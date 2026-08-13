@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ActivityIndicat
 import { Federated } from '@callstack/repack/client';
 
 // 1. Dynamically import the Mini-Apps Over-The-Air (Locally)
-const ContractMiniApp = React.lazy(() => Federated.importModule('Contract', './App'));
-const ARMiniApp = React.lazy(() => Federated.importModule('AR', './App'));
-const RedMarkingMiniApp = React.lazy(() => Federated.importModule('RedMarking', './App'));
+const ContractMiniApp = React.lazy(() => Federated.importModule('contract_app', './App'));
+const ARMiniApp = React.lazy(() => Federated.importModule('ar_app', './App'));
+const RedMarkingMiniApp = React.lazy(() => Federated.importModule('red_marking_app', './App'));
 export default function App() {
   // State to track which mini-app is currently "open"
   const [activeApp, setActiveApp] = useState<string | null>(null);
@@ -15,7 +15,7 @@ export default function App() {
     if (!activeApp) return null;
 
     let MiniAppToRender;
-    if (activeApp === 'Contract') MiniAppToRender = ContractMiniApp;
+    if (activeApp === 'contract_app') MiniAppToRender = ContractMiniApp;
     if (activeApp === 'AR') MiniAppToRender = ARMiniApp;
     if (activeApp === 'Red Marking') MiniAppToRender = RedMarkingMiniApp;
 
@@ -41,7 +41,7 @@ export default function App() {
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
             style={[styles.button, { backgroundColor: '#3b82f6' }]} 
-            onPress={() => setActiveApp('Contract')}
+            onPress={() => setActiveApp('contract_app')}
           >
             <Text style={styles.buttonText}>Open Contract App</Text>
           </TouchableOpacity>
