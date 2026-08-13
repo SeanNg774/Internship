@@ -33,7 +33,6 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>SuperApp Host</Text>
       
       {!activeApp ? (
         <View style={styles.buttonContainer}>

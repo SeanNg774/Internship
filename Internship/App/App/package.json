@@ -10,10 +10,11 @@
     "test": "jest",
     "start:host": "cross-env APP_NAME=host react-native webpack-start",
     "start:ar": "cross-env APP_NAME=ar react-native webpack-start --port 8082",
-    "start:redmarking":"cross-env APP_NAME=red-marking react-native webpack-start --port 8083"
+    "start:redmarking": "cross-env APP_NAME=red-marking react-native webpack-start --port 8083"
   },
   "dependencies": {
-    "@callstack/repack": "^5.3.0",  
+    "@callstack/repack": "^5.3.0",
+    "@module-federation/enhanced": "^2.8.2",
     "@react-native/new-app-screen": "0.86.2",
     "react": "19.2.3",
     "react-native": "0.86.2",

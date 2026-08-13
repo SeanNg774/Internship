@@ -2,6 +2,7 @@ import { AppRegistry, Platform } from 'react-native';
 import { ScriptManager, Federated, Script} from '@callstack/repack/client';
 import App from './App';
 import { name as appName } from './app.json';
+import {registerMockCameraBridge } from './src/bridges/CameraBridge'
 
 
 
