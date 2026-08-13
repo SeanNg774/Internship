@@ -10,10 +10,21 @@ import { name as appName } from './app.json';
 ScriptManager.shared.addResolver(async (scriptId, caller) => {
   const localhost = Platform.OS === 'android' ? '10.0.2.2': 'localhost';
   // 1. Check if the Host is requesting the Contract Mini-App
-  if (scriptId === 'contract_app' || scriptId === 'Contract'|| scriptId === 'contract') {
+  if (scriptId === 'ar_app' || scriptId === 'Ar'|| scriptId === 'ar') {
     return {
       // Use backticks (`) to dynamically inject the scriptId!
       url: `http://localhost:8082/${scriptId}.container.bundle`, 
+      cache: false,
+      query: {
+        platform: Platform.OS,
+      },
+      verifyScriptSignature: 'off',
+    };
+  }
+  if (scriptId === 'redmarking_app' || scriptId === 'redmarking'|| scriptId === 'redmark') {
+    return {
+      // Use backticks (`) to dynamically inject the scriptId!
+      url: `http://localhost:8083/${scriptId}.container.bundle`, 
       cache: false,
       query: {
         platform: Platform.OS,

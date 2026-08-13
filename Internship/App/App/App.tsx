@@ -3,9 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ActivityIndicat
 import { Federated } from '@callstack/repack/client';
 
 // 1. Dynamically import the Mini-Apps Over-The-Air (Locally)
-const ContractMiniApp = React.lazy(() => Federated.importModule('contract_app', './App'));
 const ARMiniApp = React.lazy(() => Federated.importModule('ar_app', './App'));
-const RedMarkingMiniApp = React.lazy(() => Federated.importModule('red_marking_app', './App'));
+const RedMarkingMiniApp = React.lazy(() => Federated.importModule('redmarking_app', './App'));
 export default function App() {
   // State to track which mini-app is currently "open"
   const [activeApp, setActiveApp] = useState<string | null>(null);
@@ -15,9 +14,8 @@ export default function App() {
     if (!activeApp) return null;
 
     let MiniAppToRender;
-    if (activeApp === 'contract_app') MiniAppToRender = ContractMiniApp;
-    if (activeApp === 'AR') MiniAppToRender = ARMiniApp;
-    if (activeApp === 'Red Marking') MiniAppToRender = RedMarkingMiniApp;
+    if (activeApp === 'ar_app') MiniAppToRender = ARMiniApp;
+    if (activeApp === 'redmarking_app') MiniAppToRender = RedMarkingMiniApp;
 
     return (
       <View style={styles.miniAppContainer}>
@@ -41,23 +39,16 @@ export default function App() {
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
             style={[styles.button, { backgroundColor: '#3b82f6' }]} 
-            onPress={() => setActiveApp('contract_app')}
+            onPress={() => setActiveApp('ar_app')}
           >
-            <Text style={styles.buttonText}>Open Contract App</Text>
+            <Text style={styles.buttonText}> AR App</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 
-            style={[styles.button, { backgroundColor: '#10b981' }]} 
-            onPress={() => setActiveApp('AR')}
+            style={[styles.button, { backgroundColor: '#23c86a' }]} 
+            onPress={() => setActiveApp('redmarking_app')}
           >
-            <Text style={styles.buttonText}>Open AR App</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={[styles.button, { backgroundColor: '#ef4444' }]} 
-            onPress={() => setActiveApp('Red Marking')}
-          >
-            <Text style={styles.buttonText}>Open Red Marking App</Text>
+            <Text style={styles.buttonText}> Red Marking App</Text>
           </TouchableOpacity>
         </View>
       ) : (

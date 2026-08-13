@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 export default (env) => {
   // Extract environment variables safely
-  const appName = env.app || 'host';
+  const appName = process.env.APP_NAME || env.app || 'host';
   const platform = env.platform || 'android';
   const mode = env.mode || 'development';
 
@@ -62,7 +62,7 @@ export default (env) => {
         new Repack.plugins.ModuleFederationPlugin({
           name: 'host_app',
           remotes: {
-            contract_app: 'contract_app@dynamic',
+            ar_app: 'ar_app@dynamic',
           },
           shared: sharedDependencies,
         }),
@@ -71,15 +71,15 @@ export default (env) => {
   }
 
   // ==========================================================
-  // 4. CONTRACT MINI-APP CONFIGURATION
+  // 4. AR MINI-APP CONFIGURATION
   // ==========================================================
-  if (appName === 'contract') {
+  if (appName === 'ar') {
     return {
       ...baseConfig,
       
       // 1. Explicitly name the entry chunk 'index' so Re.Pack recognizes it
       entry: {
-        index: './src/miniapps/contract/index.js', 
+        index: './src/miniapps/ar/index.js', 
       },
       
       // 2. Explicitly tell Webpack it is hosted on port 8082
@@ -94,10 +94,45 @@ export default (env) => {
           platform,
         }),
         new Repack.plugins.ModuleFederationPlugin({
-          name: 'contract_app',
-          filename: 'contract_app.container.bundle',
+          name: 'ar_app',
+          filename: 'ar_app.container.bundle',
           exposes: {
-            './App': './src/miniapps/contract/index.js',
+            './App': './src/miniapps/ar/index.js',
+          },
+          shared: sharedDependencies,
+        }),
+      ],
+    };
+  }
+
+  // ==========================================================
+  // 5. Red Marking MINI-APP CONFIGURATION
+  // ==========================================================
+  if (appName === 'red-marking') {
+    return {
+      ...baseConfig,
+      
+      // 1. Explicitly name the entry chunk 'index' so Re.Pack recognizes it
+      entry: {
+        index: './src/miniapps/red-marking/index.js', 
+      },
+      
+      // 2. Explicitly tell Webpack it is hosted on port 8083
+      output: {
+        publicPath: 'http://localhost:8083/', 
+      },
+      
+      plugins: [
+        new Repack.RepackPlugin({
+          context: __dirname,
+          mode,
+          platform,
+        }),
+        new Repack.plugins.ModuleFederationPlugin({
+          name: 'redmarking_app',
+          filename: 'redmarking_app.container.bundle',
+          exposes: {
+            './App': './src/miniapps/red-marking/index.js',
           },
           shared: sharedDependencies,
         }),
