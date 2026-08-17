@@ -2,10 +2,10 @@ import { AppRegistry, Platform } from 'react-native';
 import { ScriptManager, Federated, Script} from '@callstack/repack/client';
 import App from './App';
 import { name as appName } from './app.json';
-import {registerMockCameraBridge } from './src/bridges/CameraBridge'
+import {registerRealCameraBridge } from './src/bridges/RealCameraBridge'
 
 
-
+registerRealCameraBridge(); // Register the real camera bridge to global.NativeBridge.camera
 // 1. The Phonebook (Registry)
 // This tells the Host App exactly which port each Mini-App is running on locally.
 ScriptManager.shared.addResolver(async (scriptId, caller) => {

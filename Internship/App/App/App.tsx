@@ -20,7 +20,13 @@ export default function App() {
     return (
       <View style={styles.miniAppContainer}>
         {/* Suspense shows a loading spinner while Re.Pack fetches the JS bundle */}
-        <Suspense fallback={<ActivityIndicator size="large" color="#3b82f6" />}>
+        <Suspense
+          fallback={
+            <View style={styles.loadingFallback}>
+              <ActivityIndicator size="large" color="#3b82f6" />
+            </View>
+          }
+        >
           {MiniAppToRender && <MiniAppToRender />}
         </Suspense>
         
@@ -88,9 +94,12 @@ const styles = StyleSheet.create({
   miniAppContainer: {
     flex: 1,
     width: '100%',
+    backgroundColor: '#e2e8f0',
+  },
+  loadingFallback: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#e2e8f0',
   },
   miniAppText: {
     fontSize: 18,
@@ -99,8 +108,13 @@ const styles = StyleSheet.create({
     color: '#0f172a',
   },
   backButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 10,
     backgroundColor: '#64748b',
-    padding: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
     borderRadius: 8,
   }
 });
