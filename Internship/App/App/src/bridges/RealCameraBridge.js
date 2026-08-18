@@ -22,13 +22,26 @@ import {
 } from 'react-native-vision-camera';
 
 export function registerRealCameraBridge() {
+  console.log('[NativeBridge] Registering camera bridge (react-native-vision-camera)');
+
   if (!global.NativeBridge) {
     global.NativeBridge = {};
   }
   global.NativeBridge.camera = {
     Camera,
-    useCameraDevice,
-    useCameraPermission,
-    usePhotoOutput,
+    useCameraDevice: (position) => {
+      console.log(`[NativeBridge] useCameraDevice("${position}") called by mini-app`);
+      return useCameraDevice(position);
+    },
+    useCameraPermission: () => {
+      console.log('[NativeBridge] useCameraPermission() called by mini-app');
+      const result = useCameraPermission();
+      console.log(`[NativeBridge] Permission status: hasPermission=${result.hasPermission}`);
+      return result;
+    },
+    usePhotoOutput: () => {
+      console.log('[NativeBridge] usePhotoOutput() called by mini-app');
+      return usePhotoOutput();
+    },
   };
 }

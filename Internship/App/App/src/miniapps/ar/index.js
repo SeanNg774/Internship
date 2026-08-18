@@ -9,6 +9,8 @@ const FALLBACK_BRIDGE = {
 };
 
 const ARApp = () => {
+  console.log('[ARApp] Mounted - AR mini-app rendering for the first time');
+
   const bridge = (global.NativeBridge && global.NativeBridge.camera) || FALLBACK_BRIDGE;
   const { Camera, useCameraDevice, useCameraPermission, usePhotoOutput } = bridge;
  
@@ -21,7 +23,10 @@ const ARApp = () => {
  
   useEffect(() => {
     if (!hasPermission) {
+      console.log('[ARApp] No permission yet - calling requestPermission()');
       requestPermission();
+    } else {
+      console.log('[ARApp] Permission already granted');
     }
   }, [hasPermission, requestPermission]);
  
@@ -51,10 +56,13 @@ const ARApp = () => {
   }
  
   const handleCapture = async () => {
+    console.log('[ARApp] Capture button pressed - calling capturePhotoToFile()');
     try {
-      const { filePath } = await photoOutput.capturePhotoToFile();
+      const { filePath } = await photoOutput.capturePhotoToFile({}, {});
+      console.log(`[ARApp] Photo captured -> ${filePath}`);
       setPhotoUri(`file://${filePath}`);
     } catch (err) {
+      console.log(`[ARApp] Capture failed: ${err.message}`);
       setError(err.message);
     }
   };
@@ -144,4 +152,3 @@ const styles = StyleSheet.create({
 });
  
 export default ARApp;
- 

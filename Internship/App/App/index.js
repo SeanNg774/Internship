@@ -10,11 +10,14 @@ registerRealCameraBridge(); // Register the real camera bridge to global.NativeB
 // This tells the Host App exactly which port each Mini-App is running on locally.
 ScriptManager.shared.addResolver(async (scriptId, caller) => {
   const localhost = Platform.OS === 'android' ? '10.0.2.2': 'localhost';
+  console.log(`[ScriptManager] Resolving scriptId="${scriptId}" (requested by ${caller || 'host'})`);
   // 1. Check if the Host is requesting the Contract Mini-App
   if (scriptId === 'ar_app' || scriptId === 'Ar'|| scriptId === 'ar') {
+    const url = `http://localhost:8082/${scriptId}.container.bundle`;
+    console.log(`[ScriptManager] -> fetching ${url}`);
     return {
       // Use backticks (`) to dynamically inject the scriptId!
-      url: `http://localhost:8082/${scriptId}.container.bundle`, 
+      url,
       cache: false,
       query: {
         platform: Platform.OS,

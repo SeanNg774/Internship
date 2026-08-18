@@ -1,10 +1,13 @@
 import React, { useState, Suspense } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
 import { Federated } from '@callstack/repack/client';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // 1. Dynamically import the Mini-Apps Over-The-Air (Locally)
 const ARMiniApp = React.lazy(() => Federated.importModule('ar_app', './App'));
 const RedMarkingMiniApp = React.lazy(() => Federated.importModule('redmarking_app', './App'));
+
 export default function App() {
   // State to track which mini-app is currently "open"
   const [activeApp, setActiveApp] = useState<string | null>(null);

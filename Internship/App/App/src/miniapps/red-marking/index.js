@@ -5,7 +5,7 @@ const RedMarkingApp = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Red Marking Mini-App Connected!</Text>
-      <Text style={styles.subtitle}>Ready for Module Federation.</Text>
+      <Text style={styles.subtitle}>Hello world</Text>
     </View>
   );
 };
